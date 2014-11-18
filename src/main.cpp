@@ -2526,21 +2526,6 @@ bool LoadBlockIndex(bool fAllowNew)
 
         //// Debug print
         assert(block.hashMerkleRoot == uint256("0x6dbdf1d1fe818774c3035fbeb8118e1dbfd09d73d18771a8c4b8a41a842629d4"));
-        if (false && (block.GetHash() != hashGenesisBlock)) {
-
-        // This will figure out a valid hash and Nonce if you're
-        // creating a different genesis block:
-            uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
-            while (block.GetHash() > hashTarget)
-               {
-                   ++block.nNonce;
-                   if (block.nNonce == 0)
-                   {
-                       printf("NONCE WRAPPED, incrementing time");
-                       ++block.nTime;
-                   }
-               }
-        }
         block.print();
         assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
         assert(block.CheckBlock());
